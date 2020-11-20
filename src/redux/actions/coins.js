@@ -8,9 +8,7 @@ const fetchCoins = () => {
   return async (dispatch) => {
     dispatch({type: FETCHING_COINS});
     try {
-      console.log('fetching Coins');
       const response = await fetch_coins();
-      console.log(response.status);
       if (response.data.Response === 'Error') {
         throw new Error(response.data.Message);
       } else {
