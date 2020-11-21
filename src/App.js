@@ -4,6 +4,7 @@ import {Provider, useDispatch} from 'react-redux';
 import CoinList from './components/CoinList';
 import Loading from './components/Loading';
 import store from './redux/Store';
+import 'react-native-gesture-handler';
 
 const App = () => {
   const isHermes = () => !!global.HermesInternal;
