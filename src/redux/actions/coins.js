@@ -16,7 +16,7 @@ const fetchCoins = () => {
       }
     } catch (e) {
       dispatch({type: FETCH_COINS_ERROR, data: e});
-      console.log('fetchCoins -> e', e);
+      //console.log('fetchCoins -> e', e);
     }
   };
 };
