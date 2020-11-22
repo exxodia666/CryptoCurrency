@@ -3,7 +3,6 @@ import {View, Text, Dimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 const CoinScreen = ({navigation}) => {
-  console.log(navigation);
   return (
     <TouchableOpacity onPress={() => navigation('Coin')}>
       <LineChart
