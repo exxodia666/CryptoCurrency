@@ -1,18 +1,18 @@
-import React, {useEffect} from 'react';
-import {View, Text, ScrollView, Image} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import { View, Text, ScrollView, Image } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import Coin from '../../components/Coin';
 import Error from '../../components/Error';
 import Loading from '../../components/Loading';
-import {status} from '../../constants/status';
+import { status } from '../../constants/status';
 import fetchCoins from '../../redux/actions/coins';
 
-const CoinListScreen = ({navigation}) => {
+const CoinListScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const status_store = useSelector((state) => state.status);
   const data = useSelector((state) => state.coins);
   //TODO multiple currency
-  const value = 'UAH';
+  const value = 'USD';
 
   useEffect(() => {
     dispatch(fetchCoins());
@@ -27,8 +27,8 @@ const CoinListScreen = ({navigation}) => {
     console.log('Success');
     return (
       <View>
-          {//todo FlatList
-          }
+        {//todo FlatList
+        }
         <ScrollView>
           {data.data.Data.map((item) => {
             return (
