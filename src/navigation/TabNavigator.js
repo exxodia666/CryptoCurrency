@@ -27,7 +27,7 @@ const TabNavigator = () => {
           ),
         }}
       />
-
+      {/*
       <Tab.Screen
         name="Screen"
         component={Screen}
@@ -36,7 +36,7 @@ const TabNavigator = () => {
             <TabButton name="gear" label="Screen" {...props} />
           ),
         }}
-      />
+      />*/}
     </Tab.Navigator>
   );
 };
