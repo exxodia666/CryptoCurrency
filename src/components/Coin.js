@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import CoinScreen from '../navigation/Screens/CoinScreen';
+import { Transition, Transitioning } from 'react-native-reanimated';
+
 const Coin = ({
   id,
   name,
@@ -15,12 +17,23 @@ const Coin = ({
   price_symbol,
   navigation,
 }) => {
+  const ref = React.useRef();
   const [graph, setGraph] = useState(false);
+  const transition = (<Transition.Sequence>
+    <Transition.In type='fade' delayMs={10} />
+    <Transition.Change interpolation='easeOut' delayMs={10} />
+    <Transition.Out type='fade' delayMs={10} />
+  </Transition.Sequence>)
+
+
   return (
-    <View style={style.container}>
+    <Transitioning.View
+      ref={ref}
+      transition={transition}
+      style={style.container}>
       <TouchableOpacity
-        //style={{width: '100%', backgroundColor: 'yellow'}}
         onPress={() => {
+          ref.current.animateNextTransition();
           setGraph(!graph);
         }}>
         <View
@@ -30,7 +43,7 @@ const Coin = ({
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <Image
               style={style.image}
               source={{
@@ -38,8 +51,8 @@ const Coin = ({
               }}
             />
             <View>
-              <Text style={{...style.text, fontSize: 18}}>{name}</Text>
-              <Text style={{...style.text, color: 'grey'}}>{symbol}</Text>
+              <Text style={{ ...style.text, fontSize: 18 }}>{name}</Text>
+              <Text style={{ ...style.text, color: 'grey' }}>{symbol}</Text>
             </View>
           </View>
           {/*
@@ -58,7 +71,7 @@ const Coin = ({
           ? Math.abs(changeDay)
           : changeDay}
         </Text>*/}
-          <View style={{alignItems: 'flex-end'}}>
+          <View style={{ alignItems: 'flex-end' }}>
             <Text style={style.text}>${price}</Text>
             {!(changeHour == 0) && (
               <View
@@ -73,37 +86,38 @@ const Coin = ({
                     ...(changeHour > 0
                       ? style.greenText
                       : changeHour == 0
-                      ? style.grey
-                      : style.redText),
+                        ? style.grey
+                        : style.redText),
                     ...style.text,
                   }}>
                   {changeHour > 0
                     ? '+' + changeHour
                     : changeHour == 0
-                    ? Math.abs(changeHour)
-                    : changeHour}
+                      ? Math.abs(changeHour)
+                      : changeHour}
                 </Text>
                 <Ionicons
                   name={
                     changeHour > 0
                       ? 'arrow-up'
                       : changeHour < 0
-                      ? 'arrow-down'
-                      : true
+                        ? 'arrow-down'
+                        : true
                   }
                   size={20}
                   color={
                     changeHour > 0 ? 'green' : changeHour == 0 ? 'black' : 'red'
                   }
-                  //style={{borderWidth: 0.5, alignContent: 'center'}}
+                //style={{borderWidth: 0.5, alignContent: 'center'}}
                 />
               </View>
             )}
           </View>
         </View>
       </TouchableOpacity>
-      {graph && <CoinScreen navigation={navigation} />}
-    </View>
+      {graph &&
+        <CoinScreen navigation={navigation} />}
+    </Transitioning.View>
   );
 };
 
@@ -135,7 +149,7 @@ const style = StyleSheet.create({
     height: 50,
   },
   container: {
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.4,
     //flexDirection: 'row',
   },
   text: {
