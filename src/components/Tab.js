@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native';
+import {Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 
-function TabButton({ name, label, onPress, accessibilityState }) {
+function TabButton({name, label, onPress, accessibilityState}) {
   console.log(accessibilityState);
 
   /*
@@ -24,27 +24,30 @@ function TabButton({ name, label, onPress, accessibilityState }) {
       }}>
       <View
         style={{
-          //flex: 1 / 3,
+          flex: 1,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          width: accessibilityState.selected ? '60%' : '40%',
-          //backgroundColor: accessibilityState.selected ? 'red' : 'white',
+          //width: accessibilityState.selected ? '60%' : '40%',
+          backgroundColor: accessibilityState.selected ? 'red' : 'white',
+          borderRadius: 30,
+          margin: 5,
         }}>
         <Icon name={name} size={28} />
         {accessibilityState.selected && (
-          <Text style={{
-            paddingLeft: 5,
-            fontSize: 16.5,
-            //borderWidth: 0.5,
-            textAlignVertical: 'top',
-            textAlign: 'center',
-          }}>
+          <Text
+            style={{
+              paddingLeft: 5,
+              fontSize: 16.5,
+              //borderWidth: 0.5,
+              textAlignVertical: 'top',
+              textAlign: 'center',
+            }}>
             {label}
           </Text>
         )}
       </View>
-    </TouchableOpacity >
+    </TouchableOpacity>
   );
 }
 export default TabButton;
