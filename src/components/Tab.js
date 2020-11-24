@@ -1,35 +1,36 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native';
+import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { Transition, Transitioning } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
 //import styled from 'styled-components';
 
-function TabButton({name, label, onPress, accessibilityState}) {
-  console.log(accessibilityState);
+function TabButton({ name, label, onPress, accessibilityState }) {
+  const ref = React.useRef();
+  const transition = (<Transition.Sequence>
+    <Transition.Out type='fade' delayMs={0} />
+    <Transition.Change interpolation='easeOut' delayMs={10} />
+    <Transition.In type='fade' delayMs={10} />
+  </Transition.Sequence>)
 
-  /*
-    const StyledText = styled.Text`
-      padding-left: 4px;
-      color: black;
-      fontSize: 19px;
-      font-family: 'Poppins-Medium',
-    `;*/
   return (
     <TouchableOpacity
       style={{
         flex: 1,
       }}
       onPress={() => {
+        ref.current.animateNextTransition();
         onPress();
       }}>
-      <View
+      <Transitioning.View
+        ref={ref}
+        transition={transition}
         style={{
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          //width: accessibilityState.selected ? '60%' : '40%',
-          backgroundColor: accessibilityState.selected ? 'red' : 'white',
+          backgroundColor: accessibilityState.selected ? 'rgba(0,0,0,0.5)' : 'white',
           borderRadius: 30,
           margin: 5,
         }}>
@@ -37,17 +38,18 @@ function TabButton({name, label, onPress, accessibilityState}) {
         {accessibilityState.selected && (
           <Text
             style={{
-              paddingLeft: 5,
+              paddingLeft: 8,
               fontSize: 16.5,
               //borderWidth: 0.5,
               textAlignVertical: 'top',
               textAlign: 'center',
+              fontFamily: 'NotoSansJP-Medium'
             }}>
             {label}
           </Text>
         )}
-      </View>
-    </TouchableOpacity>
+      </Transitioning.View>
+    </TouchableOpacity >
   );
 }
 export default TabButton;
