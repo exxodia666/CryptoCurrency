@@ -1,31 +1,35 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import {Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-function TabButton({ name, label, onPress, accessibilityState, }) {
-
-    const func = () => {
-        console.log('Alo blya');
+function TabButton({name, label, onPress, accessibilityState}) {
+  console.log(accessibilityState);
+  return (
+    <TouchableOpacity
+      onPress={() => {
         onPress();
-    }
-    return (
-
-        <TouchableWithoutFeedback onPress={() => { console.log("FAAAAAAAAAAAAAK") }}>
-            <Icon style={{
-            }}
-                name={name}
-                size={20}
-            />
-            <Text style={{
-                fontSize: 16,
-                fontFamily: 'Poppins-Medium',
-                //borderWidth: 0.5 
+      }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: accessibilityState.selected ? 'red' : 'white',
+        }}>
+        <Icon style={{}} name={name} size={20} />
+        {accessibilityState.selected && (
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Poppins-Medium',
+              //borderWidth: 0.5
             }}>
-                {"label"}
-            </Text>
-        </TouchableWithoutFeedback>
-
-    )
-};
+            {label}
+          </Text>
+        )}
+      </View>
+    </TouchableOpacity>
+  );
+}
 export default TabButton;
