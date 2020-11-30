@@ -1,9 +1,8 @@
 import * as React from 'react';
 import StackNavigator from './StackNavigator';
-import SettingsScreen from './Screens/SettingsScreen';
 import TabButton from '../components/Tab';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Screen from './Screens/Screen';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import SettingsStack from './SettingsStack';
 
 const TabNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -19,8 +18,8 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
+        name="SettingsStack"
+        component={SettingsStack}
         options={{
           tabBarButton: (props) => (
             <TabButton name="gear" label="Settings" {...props} />

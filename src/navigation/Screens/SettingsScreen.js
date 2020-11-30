@@ -1,48 +1,107 @@
-import React, {useState} from 'react';
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import React, {useEffect, useState} from 'react';
+import {
+  Button,
+  Dimensions,
+  Image,
+  Picker,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import saveSettings from '../../redux/actions/settings';
 
 const SettingsScreen = () => {
   const settings = useSelector((state) => state.settings);
-
+  //const [selectedValue, setSelectedValue] = useState('java');
+  useEffect(() => {
+    console.log('RENDER SETTINGS');
+  });
   const [state, setState] = useState(settings.currency);
   const dispatch = useDispatch();
+
   return (
-    <View>
-      <View style={style.header}>
-        <Text style={style.text}>Settings</Text>
+    <View
+      style={{
+        justifyContent: 'space-between',
+        height: '100%',
+      }}>
+      <View>
+        <DropDownPicker
+          items={[
+            {
+              label: 'USD',
+              value: 'USD',
+             
+            },
+            {
+              label: 'RUB',
+              value: 'RUB',
+            },
+            {
+              label: 'UAH',
+              value: 'UAH',
+            },
+            {
+              label: 'USD',
+              value: 'USD',
+              
+            },
+            {
+              label: 'USD',
+              value: 'USD',
+     
+            },
+            {
+              label: 'USD',
+              value: 'USD',
+             
+            },
+            {
+              label: 'USD',
+              value: 'USD',
+             
+            },
+            {
+              label: 'USD',
+              value: 'USD',
+              
+            },
+            {
+              label: 'USD',
+              value: 'USD',
+             
+            },
+          ]}
+          defaultValue={state}
+          containerStyle={{height: 40}}
+          style={{backgroundColor: '#fafafa'}}
+          itemStyle={{
+            justifyContent: 'flex-start',
+          }}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          onChangeItem={(item) => setState(item.value)}
+        />
+        
       </View>
-      <DropDownPicker
-        items={[
-          {
-            label: 'USD',
-            value: 'USD',
-            hidden: true,
-          },
-          {
-            label: 'RUB',
-            value: 'RUB',
-          },
-          {
-            label: 'UAH',
-            value: 'UAH',
-          },
-        ]}
-        defaultValue={state}
-        containerStyle={{height: 40, marginBottom: '135%'}}
-        style={{backgroundColor: '#fafafa'}}
-        itemStyle={{
-          justifyContent: 'flex-start',
-        }}
-        dropDownStyle={{backgroundColor: '#fafafa'}}
-        onChangeItem={(item) => setState(item.value)}
-      />
       <Button
         title="Save Changes"
         onPress={() => dispatch(saveSettings(state))}
       />
+      {/*
+      <Picker
+        selectedValue={selectedValue}
+        style={{height: 50, width: 150}}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+        <Picker.Item label="Java" value="java" />
+        <Picker.Item label="JavaScript" value="js" />
+      </Picker>
+
+      {/**/}
     </View>
   );
 };
