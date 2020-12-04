@@ -10,12 +10,11 @@ import fetchCoins from '../../redux/actions/coins';
 const CoinListScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const status_store = useSelector((state) => state.status);
+  const currency = useSelector(state => state.settings.currency);
   const data = useSelector((state) => state.coins);
   //TODO multiple currency
-  const value = 'USD';
-
   useEffect(() => {
-    dispatch(fetchCoins());
+    dispatch(fetchCoins(currency));
   }, [dispatch]);
 
   if (status_store.status === status.fetching) {
@@ -31,16 +30,18 @@ const CoinListScreen = ({ navigation }) => {
         }
         <ScrollView>
           {data.data.Data.map((item) => {
+            console.log(item);
             return (
               <Coin
+                currency={currency}
                 navigation={navigation.navigate}
                 key={item.CoinInfo.Id}
                 name={item.CoinInfo.FullName}
                 symbol={item.CoinInfo.Name}
                 url={item.CoinInfo.ImageUrl}
-                changeDay={item.RAW[value].CHANGEDAY.toFixed(2)}
-                changeHour={item.RAW[value].CHANGEHOUR.toFixed(2)}
-                price={item.RAW[value].PRICE.toFixed(2)}
+                changeDay={item.RAW[currency].CHANGEDAY.toFixed(2)}
+                changeHour={item.RAW[currency].CHANGEHOUR.toFixed(2)}
+                price={item.RAW[currency].PRICE.toFixed(2)}
               />
             );
           })}

@@ -3,9 +3,6 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import CoinScreen from '../navigation/Screens/CoinScreen';
-import { Transition, Transitioning } from 'react-native-reanimated';
-
 const Coin = ({
   id,
   name,
@@ -16,25 +13,14 @@ const Coin = ({
   price,
   price_symbol,
   navigation,
+  currency
 }) => {
-  const ref = React.useRef();
-  const [graph, setGraph] = useState(false);
-  const transition = (<Transition.Sequence>
-    <Transition.In type='fade' delayMs={10} />
-    <Transition.Change interpolation='easeOut' delayMs={10} />
-    <Transition.Out type='fade' delayMs={10} />
-  </Transition.Sequence>)
-
-
   return (
-    <Transitioning.View
-      ref={ref}
-      transition={transition}
+    <View
       style={style.container}>
       <TouchableOpacity
         onPress={() => {
-          ref.current.animateNextTransition();
-          setGraph(!graph);
+          navigation('Coin', { name: name });
         }}>
         <View
           style={{
@@ -72,7 +58,7 @@ const Coin = ({
           : changeDay}
         </Text>*/}
           <View style={{ alignItems: 'flex-end' }}>
-            <Text style={style.text}>${price}</Text>
+            <Text style={style.text}>{price} {currency} </Text>
             {!(changeHour == 0) && (
               <View
                 style={{
@@ -115,9 +101,7 @@ const Coin = ({
           </View>
         </View>
       </TouchableOpacity>
-      {graph &&
-        <CoinScreen navigation={navigation} />}
-    </Transitioning.View>
+    </View>
   );
 };
 
@@ -149,6 +133,7 @@ const style = StyleSheet.create({
     height: 50,
   },
   container: {
+    backgroundColor: 'white',
     borderBottomWidth: 0.4,
     //flexDirection: 'row',
   },

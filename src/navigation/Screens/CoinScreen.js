@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text, Dimensions} from 'react-native';
-import {LineChart} from 'react-native-chart-kit';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-const CoinScreen = ({navigation}) => {
+import { View, Text, Dimensions } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+const CoinScreen = ({ navigation, route }) => {
+  //console.log(route.params);
   return (
-    <TouchableOpacity onPress={() => navigation('Coin')}>
+    <TouchableOpacity>
       <LineChart
         data={{
           labels: ['January', 'February', 'March', 'April', 'May', 'June'],

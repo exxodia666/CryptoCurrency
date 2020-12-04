@@ -1,26 +1,23 @@
-import {createStackNavigator} from '@react-navigation/stack';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  Alert,
   Button,
-  Dimensions,
-  Image,
-  Picker,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {ScrollView} from 'react-native-gesture-handler';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import fetchCoins from '../../redux/actions/coins';
 import saveSettings from '../../redux/actions/settings';
 
 const SettingsScreen = () => {
-  const settings = useSelector((state) => state.settings);
-  //const [selectedValue, setSelectedValue] = useState('java');
+  const currency = useSelector(state => state.settings.currency);
+  /*
   useEffect(() => {
     console.log('RENDER SETTINGS');
   });
-  const [state, setState] = useState(settings.currency);
+  */
+  const [state, setState] = useState(currency);
   const dispatch = useDispatch();
 
   return (
@@ -33,11 +30,6 @@ const SettingsScreen = () => {
         <DropDownPicker
           items={[
             {
-              label: 'USD',
-              value: 'USD',
-             
-            },
-            {
               label: 'RUB',
               value: 'RUB',
             },
@@ -48,49 +40,29 @@ const SettingsScreen = () => {
             {
               label: 'USD',
               value: 'USD',
-              
-            },
-            {
-              label: 'USD',
-              value: 'USD',
-     
-            },
-            {
-              label: 'USD',
-              value: 'USD',
-             
-            },
-            {
-              label: 'USD',
-              value: 'USD',
-             
-            },
-            {
-              label: 'USD',
-              value: 'USD',
-              
-            },
-            {
-              label: 'USD',
-              value: 'USD',
-             
             },
           ]}
           defaultValue={state}
-          containerStyle={{height: 40}}
-          style={{backgroundColor: '#fafafa'}}
+          containerStyle={{ height: 40 }}
+          style={{ backgroundColor: '#fafafa' }}
           itemStyle={{
             justifyContent: 'flex-start',
           }}
-          dropDownStyle={{backgroundColor: '#fafafa'}}
-          dropDownStyle={{backgroundColor: '#fafafa'}}
+          dropDownStyle={{ backgroundColor: '#fafafa' }}
+          dropDownStyle={{ backgroundColor: '#fafafa' }}
           onChangeItem={(item) => setState(item.value)}
         />
-        
+        {
+          //TODO BETTER ALERTS
+        }
       </View>
       <Button
         title="Save Changes"
-        onPress={() => dispatch(saveSettings(state))}
+        onPress={() => {
+          dispatch(saveSettings(state));
+          dispatch(fetchCoins(state));
+          Alert.alert('Saved!');
+        }}
       />
       {/*
       <Picker
