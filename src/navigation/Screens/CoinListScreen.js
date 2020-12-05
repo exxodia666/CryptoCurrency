@@ -6,13 +6,14 @@ import Error from '../../components/Error';
 import Loading from '../../components/Loading';
 import { status } from '../../constants/status';
 import fetchCoins from '../../redux/actions/coins';
+//import fetchCoins from '../../redux/actions/coins';
 
 const CoinListScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const status_store = useSelector((state) => state.status);
   const currency = useSelector(state => state.settings.currency);
   const data = useSelector((state) => state.coins);
-  //TODO multiple currency
+
   useEffect(() => {
     dispatch(fetchCoins(currency));
   }, [dispatch]);
@@ -30,7 +31,6 @@ const CoinListScreen = ({ navigation }) => {
         }
         <ScrollView>
           {data.data.Data.map((item) => {
-            console.log(item);
             return (
               <Coin
                 currency={currency}

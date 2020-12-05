@@ -9,7 +9,7 @@ const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={CoinListScreen} />
       <Stack.Screen name="Coin" component={CoinScreen} options={(navigation) => {
-        return { title: navigation.route.params.name }
+        return { title: `${navigation.route.params.name} | ${navigation.route.params.symbol}` }
       }} />
     </Stack.Navigator>
   );

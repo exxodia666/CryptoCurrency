@@ -6,7 +6,6 @@ import saveSettings from '../../redux/actions/settings';
 
 const Screen = () => {
     const settings = useSelector((state) => state.settings);
-
     const [state, setState] = useState(settings.currency);
     const dispatch = useDispatch();
     return (
