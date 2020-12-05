@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 const Coin = ({
-  id,
   name,
   symbol,
   url,
-  changeDay,
   changeHour,
   price,
-  price_symbol,
   navigation,
   currency
 }) => {
@@ -20,7 +16,7 @@ const Coin = ({
       style={style.container}>
       <TouchableOpacity
         onPress={() => {
-          navigation('Coin', { name: name });
+          navigation('Coin', { name: name, symbol: symbol });
         }}>
         <View
           style={{
