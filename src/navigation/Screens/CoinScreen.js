@@ -5,15 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { status } from '../../constants/status';
 import fetchDailyCoins from '../../redux/actions/daily_coins';
 import Loading from '../../components/Loading';
-
+//REFACTOR
 const CoinScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(fetchDailyCoins(currency, route.params.symbol));
   }, [dispatch]);
+  
   const daily_status = useSelector(state => state.daily_coins_status.status);
   const currency = useSelector(state => state.settings.currency);
   const data = useSelector(state => state.daily_coins);
+
   //remove to constants
   const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thi', 'Fri', 'Sat'];
   if (daily_status === status.error) {

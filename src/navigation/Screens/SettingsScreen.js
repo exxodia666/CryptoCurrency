@@ -9,7 +9,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchCoins from '../../redux/actions/coins';
 import saveSettings from '../../redux/actions/settings';
-
+//render button after changes
 const SettingsScreen = () => {
   const currency = useSelector(state => state.settings.currency);
   /*
@@ -27,6 +27,9 @@ const SettingsScreen = () => {
         height: '100%',
       }}>
       <View>
+        {
+          //todo fetch currencies
+        }
         <DropDownPicker
           items={[
             {
