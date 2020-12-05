@@ -36,7 +36,7 @@ const CoinScreen = ({ navigation, route }) => {
         width={Dimensions.get('window').width} // from react-native
         height={Dimensions.get('window').height * 0.9}
         //yAxisLabel={currency}
-        yAxisSuffix={currency}
+        //yAxisSuffix={currency}
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           backgroundColor: '#ffffff',
@@ -49,14 +49,14 @@ const CoinScreen = ({ navigation, route }) => {
             borderRadius: 16,
           },
           propsForDots: {
-            r: '6',
+            r: '4',
             strokeWidth: '2',
             stroke: '#ffa726',
           },
         }}
         bezier
         style={{
-          marginVertical: 8,
+          marginVertical: 10,
           //borderRadius: 16,
         }}
       />
