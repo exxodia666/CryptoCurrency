@@ -6,6 +6,12 @@ import 'react-native-gesture-handler';
 import MainNavigator from './navigation/MainNavigator';
 import Loading from './components/Loading';
 
+//TODO ADVANSED SETTINGS
+//LOCALISATION 
+//SERCH
+//FAVOURITE CURRENCIES
+//REFACTOR
+
 const App = () => {
   const isHermes = () => !!global.HermesInternal;
   const { store, persistor } = configureStore();
