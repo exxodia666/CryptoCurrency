@@ -11,7 +11,8 @@ import Loading from './components/Loading';
 //SERCH
 //FAVOURITE CURRENCIES
 //REFACTOR
-
+//EXTREME Optimisation
+//LAST COINS WHEN NO INTERNET
 const App = () => {
   const isHermes = () => !!global.HermesInternal;
   const { store, persistor } = configureStore();
