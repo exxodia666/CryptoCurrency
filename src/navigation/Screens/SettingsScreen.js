@@ -11,12 +11,11 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchCoins from '../../redux/actions/coins';
 import saveSettings from '../../redux/actions/settings';
-import Slider from '@react-native-community/slider'
-import Coin from '../../components/Coin';
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import Setting from '../../components/Setting';
+import Block from '../../components/Block';
 //render button after changes
 const SettingsScreen = () => {
+  const isHermes = () => !!global.HermesInternal;
   const currency = useSelector(state => state.settings.currency);
   const [state, setState] = useState(currency);
   const [language, setLanguage] = useState('ENGLISH');
@@ -24,11 +23,16 @@ const SettingsScreen = () => {
   const dispatch = useDispatch();
   const [fontSize, setFontSize] = useState(12);
   const [isEnabled, toggleSwitch] = useState(true);
+
   return (
 
     <View>
       <Setting />
-
+      <Block>
+        <Text>Block</Text>
+        <Text>Block</Text>
+        <Text>Block</Text>
+      </Block>
       <View>
         {
           //todo fetch currencies
@@ -58,6 +62,7 @@ const SettingsScreen = () => {
           dropDownStyle={{ backgroundColor: '#fafafa' }}
           onChangeItem={(item) => setState(item.value)}
         /></View>
+      <Text>Hermes: {isHermes().toString()}</Text>
       <Button
         title="Save Changes"
         onPress={() => {
@@ -71,7 +76,7 @@ const SettingsScreen = () => {
 };
 /*
 Coin.proptypes = {
-        id: PropTypes.number,
+  id: PropTypes.number,
   price: PropTypes.number,
   price_symbol: PropTypes.string,
   url: PropTypes.string,
