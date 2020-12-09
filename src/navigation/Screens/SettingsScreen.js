@@ -12,7 +12,7 @@ import saveSettings from '../../redux/actions/settings';
 import Slider from '@react-native-community/slider'
 import Coin from '../../components/Coin';
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import Setting from '../../components/Setting';
+
 
 //render button after changes
 const SettingsScreen = () => {
@@ -65,34 +65,9 @@ const SettingsScreen = () => {
       </View>
 
 
-
-      <DropDownPicker
-        items={[
-          {
-            label: 'RUB',
-            value: 'RUB',
-          },
-          {
-            label: 'UAH',
-            value: 'UAH',
-          },
-          {
-            label: 'USD',
-            value: 'USD',
-          },
-        ]}
-        defaultValue={state}
-        containerStyle={{ height: 40 }}
-        style={{ backgroundColor: '#fafafa' }}
-        itemStyle={{
-          justifyContent: 'flex-start',
-        }}
-        dropDownStyle={{ backgroundColor: '#fafafa' }}
-        dropDownStyle={{ backgroundColor: '#fafafa' }}
-        onChangeItem={(item) => setState(item.value)}
-      />
+      {/*
       <Setting setIconSize={setIconSize} iconSize={iconSize} />
-
+      */}
       <Button
         title="Save Changes"
         onPress={() => {
