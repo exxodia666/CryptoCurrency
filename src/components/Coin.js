@@ -9,7 +9,8 @@ const Coin = ({
   changeHour,
   price,
   navigation,
-  currency
+  currency,
+  iconSize
 }) => {
   return (
     <View
@@ -27,7 +28,10 @@ const Coin = ({
           }}>
           <View style={{ flexDirection: 'row' }}>
             <Image
-              style={style.image}
+              style={iconSize ? {
+                width: iconSize,
+                height: iconSize,
+              } : style.image}
               source={{
                 uri: `https://www.cryptocompare.com${url}`,
               }}
@@ -124,6 +128,11 @@ const style = StyleSheet.create({
     color: 'red',
   },
   image: {
+    borderRightWidth: 0.5,
+    width: 50,
+    height: 50,
+  },
+  icon: {
     borderRightWidth: 0.5,
     width: 50,
     height: 50,
