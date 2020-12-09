@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { Transition, Transitioning } from 'react-native-reanimated';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 //import styled from 'styled-components';
 
 function TabButton({ name, label, onPress, accessibilityState }) {

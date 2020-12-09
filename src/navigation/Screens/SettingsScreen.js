@@ -28,7 +28,7 @@ const SettingsScreen = () => {
 
     <View>
       <Setting />
-      {/*
+
       <View>
         {
           //todo fetch currencies
@@ -57,81 +57,7 @@ const SettingsScreen = () => {
           dropDownStyle={{ backgroundColor: '#fafafa' }}
           dropDownStyle={{ backgroundColor: '#fafafa' }}
           onChangeItem={(item) => setState(item.value)}
-        />
-        <DropDownPicker
-          items={[
-            {
-              label: 'UKRAINIAN',
-              value: 'UKRAINIAN',
-            },
-            {
-              label: 'RUSSIAN',
-              value: 'RUSSIAN',
-            },
-            {
-              label: 'ENGLISH',
-              value: 'ENGLISH',
-            },
-          ]}
-          defaultValue={language}
-          containerStyle={{ height: 40 }}
-          style={{ backgroundColor: '#fafafa' }}
-          itemStyle={{
-            justifyContent: 'flex-start',
-          }}
-          dropDownStyle={{ backgroundColor: '#fafafa' }}
-          dropDownStyle={{ backgroundColor: '#fafafa' }}
-          onChangeItem={(item) => setLanguage(item.value)}
-        />
-        {
-          //TODO BETTER ALERTS
-        }
-      </View>
-      <Coin
-        currency="USD"
-        //navigation={navigation.navigate}
-        //key={item.CoinInfo.Id}
-        name='Bitcoin'
-        symbol='BTC'
-        url='/media/19633/btc.png'
-        changeDay={3556}
-        changeHour={2}
-        price={156657}
-      />
-      <Icon
-        name='icons'
-        size = {35}
-      />
-      <Text>IconSize: {iconSize}</Text>
-      <Slider
-        onValueChange={(e) => setIconSize(e)}
-        step={1}
-        style={{ width: '100%', height: 40, padding: 10 }}
-        value={iconSize}
-        minimumValue={5}
-        maximumValue={20}
-        minimumTrackTintColor="#000000"
-        maximumTrackTintColor="#FFFFFF"
-      />
-      <Text>FontSize: {fontSize}</Text>
-      <Slider
-        onValueChange={(e) => setFontSize(e)}
-        step={1}
-        style={{ width: '100%', height: 40, padding: 10 }}
-        value={fontSize}
-        minimumValue={5}
-        maximumValue={20}
-        minimumTrackTintColor="#000000"
-        maximumTrackTintColor="#FFFFFF"
-      />
-      <Text>Dark theme</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
+        /></View>
       <Button
         title="Save Changes"
         onPress={() => {
@@ -139,7 +65,7 @@ const SettingsScreen = () => {
           dispatch(fetchCoins(state));
           Alert.alert('Saved!');
         }}
-      />*/}
+      />
     </View>
   );
 };
@@ -259,4 +185,79 @@ export default SettingsScreen;
         </View>
       </View>
           */}
-
+{/*
+        <DropDownPicker
+          items={[
+            {
+              label: 'UKRAINIAN',
+              value: 'UKRAINIAN',
+            },
+            {
+              label: 'RUSSIAN',
+              value: 'RUSSIAN',
+            },
+            {
+              label: 'ENGLISH',
+              value: 'ENGLISH',
+            },
+          ]}
+          defaultValue={language}
+          containerStyle={{ height: 40 }}
+          style={{ backgroundColor: '#fafafa' }}
+          itemStyle={{
+            justifyContent: 'flex-start',
+          }}
+          dropDownStyle={{ backgroundColor: '#fafafa' }}
+          dropDownStyle={{ backgroundColor: '#fafafa' }}
+          onChangeItem={(item) => setLanguage(item.value)}
+        />
+        {
+          //TODO BETTER ALERTS
+        }
+      </View>
+      <Coin
+        currency="USD"
+        //navigation={navigation.navigate}
+        //key={item.CoinInfo.Id}
+        name='Bitcoin'
+        symbol='BTC'
+        url='/media/19633/btc.png'
+        changeDay={3556}
+        changeHour={2}
+        price={156657}
+      />
+      <Icon
+        name='icons'
+        size = {35}
+      />
+      <Text>IconSize: {iconSize}</Text>
+      <Slider
+        onValueChange={(e) => setIconSize(e)}
+        step={1}
+        style={{ width: '100%', height: 40, padding: 10 }}
+        value={iconSize}
+        minimumValue={5}
+        maximumValue={20}
+        minimumTrackTintColor="#000000"
+        maximumTrackTintColor="#FFFFFF"
+      />
+      <Text>FontSize: {fontSize}</Text>
+      <Slider
+        onValueChange={(e) => setFontSize(e)}
+        step={1}
+        style={{ width: '100%', height: 40, padding: 10 }}
+        value={fontSize}
+        minimumValue={5}
+        maximumValue={20}
+        minimumTrackTintColor="#000000"
+        maximumTrackTintColor="#FFFFFF"
+      />
+      <Text>Dark theme</Text>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+      */}

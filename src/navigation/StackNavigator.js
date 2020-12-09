@@ -2,12 +2,29 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import CoinListScreen from './Screens/CoinListScreen';
 import CoinScreen from './Screens/CoinScreen';
+import { Button } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const StackNavigator = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={CoinListScreen} />
+      <Stack.Screen name="Home" component={CoinListScreen} options={{
+        headerRight: () => (
+          <TouchableOpacity
+            style={{ marginRight: 10 }}
+            onPress={() => alert('This is a button!')}
+          >
+            <Icon
+              color='black'
+              name="md-search"
+              size={30}
+            />
+          </TouchableOpacity>
+
+        ),
+      }} />
       <Stack.Screen name="Coin" component={CoinScreen} options={(navigation) => {
         return { title: `${navigation.route.params.name} | ${navigation.route.params.symbol}` }
       }} />

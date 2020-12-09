@@ -5,43 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import saveSettings from '../../redux/actions/settings';
 
 const Screen = () => {
-    const settings = useSelector((state) => state.settings);
-    const [state, setState] = useState(settings.currency);
-    const dispatch = useDispatch();
     return (
         <View>
-            <View style={style.header}>
-                <Text style={style.text}>Settings</Text>
-            </View>
-            <DropDownPicker
-                items={[
-                    {
-                        label: 'USD',
-                        value: 'USD',
-                        hidden: true,
-                    },
-                    {
-                        label: 'RUB',
-                        value: 'RUB',
-                    },
-                    {
-                        label: 'UAH',
-                        value: 'UAH',
-                    },
-                ]}
-                defaultValue={state}
-                containerStyle={{ height: 40, marginBottom: '135%' }}
-                style={{ backgroundColor: '#fafafa' }}
-                itemStyle={{
-                    justifyContent: 'flex-start',
-                }}
-                dropDownStyle={{ backgroundColor: '#fafafa' }}
-                onChangeItem={(item) => setState(item.value)}
-            />
-            <Button
-                title="Save Changes"
-                onPress={() => dispatch(saveSettings(state))}
-            />
+
         </View>
     );
 };

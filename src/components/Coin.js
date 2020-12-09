@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Fontisto';
 const Coin = ({
   name,
   symbol,
@@ -12,6 +13,7 @@ const Coin = ({
   currency,
   iconSize
 }) => {
+  console.log(symbol);
   return (
     <View
       style={style.container}>
@@ -41,47 +43,49 @@ const Coin = ({
               <Text style={{ ...style.text, color: 'grey' }}>{symbol}</Text>
             </View>
           </View>
-          <View style={{ alignItems: 'flex-end' }}>
-            <Text style={style.text}>{price} {currency} </Text>
-            {!(changeHour == 0) && (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  //justifyContent: 'center',
-                  alignItems: 'center',
-                  // borderWidth: 0.5,
-                }}>
-                <Text
+
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ alignItems: "flex-end" }}>
+              <Text style={style.text}>{price} {currency} </Text>
+              {!(changeHour == 0) && (
+                <View
                   style={{
-                    ...(changeHour > 0
-                      ? style.greenText
-                      : changeHour == 0
-                        ? style.grey
-                        : style.redText),
-                    ...style.text,
+                    flexDirection: 'row',
+                    //justifyContent: 'center',
+                    alignItems: 'center',
+                    // borderWidth: 0.5,
                   }}>
-                  {changeHour > 0
-                    ? '+' + changeHour
-                    : changeHour == 0
-                      ? Math.abs(changeHour)
-                      : changeHour}
-                </Text>
-                <Ionicons
-                  name={
-                    changeHour > 0
-                      ? 'arrow-up'
-                      : changeHour < 0
-                        ? 'arrow-down'
-                        : true
-                  }
-                  size={20}
-                  color={
-                    changeHour > 0 ? 'green' : changeHour == 0 ? 'black' : 'red'
-                  }
-                //style={{borderWidth: 0.5, alignContent: 'center'}}
-                />
-              </View>
-            )}
+                  <Text
+                    style={{
+                      ...(changeHour > 0
+                        ? style.greenText
+                        : changeHour == 0
+                          ? style.grey
+                          : style.redText),
+                      ...style.text,
+                    }}>
+                    {changeHour > 0
+                      ? '+' + changeHour
+                      : changeHour == 0
+                        ? Math.abs(changeHour)
+                        : changeHour}
+                  </Text>
+                  <Ionicons
+                    name={
+                      changeHour > 0
+                        ? 'arrow-up'
+                        : changeHour < 0
+                          ? 'arrow-down'
+                          : true
+                    }
+                    size={20}
+                    color={
+                      changeHour > 0 ? 'green' : changeHour == 0 ? 'black' : 'red'
+                    }
+                  />
+                </View>
+              )}
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -122,6 +126,8 @@ const style = StyleSheet.create({
     height: 50,
   },
   container: {
+    //alignItems: "center",
+    justifyContent: "center",
     backgroundColor: 'white',
     borderBottomWidth: 0.3,
     //flexDirection: 'row',
