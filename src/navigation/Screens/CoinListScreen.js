@@ -31,6 +31,7 @@ const CoinListScreen = ({ navigation }) => {
         }
         <ScrollView>
           {data.data.Data.map((item) => {
+            console.log(item);
             return (
               <Coin
                 currency={currency}

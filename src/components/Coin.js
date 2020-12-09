@@ -41,22 +41,6 @@ const Coin = ({
               <Text style={{ ...style.text, color: 'grey' }}>{symbol}</Text>
             </View>
           </View>
-          {/*
-      <Text
-        style={{
-          ...(changeDay > 0
-            ? style.greenText
-            : changeDay == 0
-            ? style.grey
-            : style.greenText),
-          ...style.text,
-        }}>
-        {changeDay > 0
-          ? '+' + changeDay
-          : changeDay == 0
-          ? Math.abs(changeDay)
-          : changeDay}
-        </Text>*/}
           <View style={{ alignItems: 'flex-end' }}>
             <Text style={style.text}>{price} {currency} </Text>
             {!(changeHour == 0) && (
@@ -139,7 +123,7 @@ const style = StyleSheet.create({
   },
   container: {
     backgroundColor: 'white',
-    borderBottomWidth: 0.4,
+    borderBottomWidth: 0.3,
     //flexDirection: 'row',
   },
   text: {
