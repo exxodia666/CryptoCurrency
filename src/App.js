@@ -5,21 +5,23 @@ import configureStore from './redux/configureStore';
 import 'react-native-gesture-handler';
 import MainNavigator from './navigation/MainNavigator';
 import Loading from './components/Loading';
+import Test from './components/TestComponent';
 
 //TODO ADVANSED SETTINGS
 //LOCALISATION 
-//SERCH
-//FAVOURITE CURRENCIES
 //REFACTOR
 //EXTREME Optimisation
 //LAST COINS WHEN NO INTERNET
+//BETTER NAVIGATION ROUTES AND URLS
+//CONFIG FILE
 const App = () => {
-  const isHermes = () => !!global.HermesInternal;
   const { store, persistor } = configureStore();
   return (
     <PersistGate loading={<Loading />} persistor={persistor}>
       <Provider store={store}>
-        <MainNavigator />
+        {//<MainNavigator />
+        }
+        <Test />
       </Provider>
     </PersistGate>
   );

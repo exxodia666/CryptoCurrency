@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const Block = ({ children }) => {
-    console.log(children);
+const Block = ({ children, style }) => {
     return (
-        <View style={style.container}>
+        <View style={{ ...style, ...styles.container }}>
             {children}
         </View>
     );
 };
 
 Block.proptypes = {
+    children: PropTypes.component
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
+        //backgroundColor: 'white',
+        padding: 5,
         flexDirection: "row",
-        backgroundColor: 'white',
         borderWidth: 0.5,
     }
 });
