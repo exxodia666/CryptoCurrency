@@ -18,7 +18,7 @@ const Test = () => {
     const [isEnabled, toggleSwitch] = useState(false);
     const [state, setState] = useState('RUB');
 
-    const styles = isEnabled ? config.light : config.dark;
+    const styles = !isEnabled ? config.light : config.dark;
     console.log(styles.main_color);
     return (
         <View
