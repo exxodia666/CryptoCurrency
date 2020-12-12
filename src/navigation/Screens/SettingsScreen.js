@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Alert,
+  Button,
   StyleSheet,
   Switch,
   Text,
@@ -11,24 +12,49 @@ import { useDispatch, useSelector } from 'react-redux';
 import fetchCoins from '../../redux/actions/coins';
 import saveSettings from '../../redux/actions/settings';
 import Block from '../../components/Block';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import config from '../../config';
 
 //render button after changes
 const SettingsScreen = () => {
   const isHermes = () => !!global.HermesInternal;
-  const currency = useSelector(state => state.settings.currency);
-  const [state, setState] = useState(currency);
   const dispatch = useDispatch();
-  const [isEnabled, toggleSwitch] = useState(true);
-  const [changed, setChanged] = useState(true);
+  const prev_currency = useSelector(state => state.settings.currency);
+  const prev_darkMode = useSelector(state => state.settings.darkMode);
+  const [currency, setCurrency] = useState(prev_currency);
+  const [darkMode, setDarkMode] = useState(prev_darkMode);
 
+  const [changed, setChanged] = useState(true);
+  /*
+    const prevModeRef = useRef();
+    const prevCurrencyRef = useRef();
+  
+    useEffect(() => {
+      prevModeRef.current = darkMode;
+      prevCurrencyRef.current = currency;
+    });
+  
+    const prevMode = prevModeRef.current;
+    const prevCurrency = prevCurrencyRef.current;
+  
+    useEffect(() => {
+      console.log(darkMode, prevMode);
+      if (prevMode !== undefined && prevCurrency !== undefined) {
+        if (prevCurrency === currency && prevMode === darkMode) {
+          setChanged(false);
+        } else {
+          setChanged(true);
+        }
+      }
+    });
+  */
 
 
   return (
     <View style={style.container}>
       <View>
         <Block>
+          <Text style={style.text}>Mode: {darkMode.toString()}</Text>
           <Text style={style.text}>Hermes: {isHermes().toString()}</Text>
         </Block>
         <DropDownPicker
@@ -46,7 +72,7 @@ const SettingsScreen = () => {
               value: 'USD',
             },
           ]}
-          defaultValue={state}
+          defaultValue={currency}
           containerStyle={{ height: 40 }}
           style={{ backgroundColor: '#fafafa', }}
           labelStyle={{
@@ -58,16 +84,16 @@ const SettingsScreen = () => {
           }}
           dropDownStyle={{ backgroundColor: '#fafafa' }}
           dropDownStyle={{ backgroundColor: '#fafafa' }}
-          onChangeItem={(item) => setState(item.value)}
+          onChangeItem={(item) => setCurrency(item.value)}
         />
         <Block style={style.block}>
           <Text style={style.text}>Dark theme</Text>
           <Switch
             trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+            thumbColor={darkMode ? "#f5dd4b" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isEnabled}
+            onValueChange={setDarkMode}
+            value={darkMode}
           />
         </Block>
       </View>
@@ -76,8 +102,8 @@ const SettingsScreen = () => {
           <TouchableOpacity
             style={style.button}
             onPress={() => {
-              dispatch(saveSettings(state));
-              dispatch(fetchCoins(state));
+              dispatch(saveSettings({ darkMode: darkMode, currency: currency }));
+              dispatch(fetchCoins(currency));
               Alert.alert('Saved!');
             }}>
             <Text style={style.buttonText}>
@@ -86,7 +112,7 @@ const SettingsScreen = () => {
           </TouchableOpacity>
         }
       </View>
-    </View>
+    </View >
   );
 };
 /*
@@ -107,18 +133,18 @@ const style = StyleSheet.create({
     textAlign: "center",
     fontFamily: 'Poppins-Medium',
     color: 'white',
-    width: '80%',
+    width: '100%',
   },
   button: {
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
     padding: 15,
-    backgroundColor: config.main_color,
-    //width: '80%'
+    backgroundColor: 'purple',
+    width: '100%'
   },
   container: {
-    height: '95%',
+    height: '100%',
     justifyContent: "space-between",
   },
   block: {

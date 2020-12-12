@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { status } from '../../constants/status';
 import fetchDailyCoins from '../../redux/actions/daily_coins';
 import Loading from '../../components/Loading';
+import GradientComponent from '../../components/GradientComponent';
 //REFACTOR
 const CoinScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchDailyCoins(currency, route.params.symbol));
   }, [dispatch]);
-  
+
   const daily_status = useSelector(state => state.daily_coins_status.status);
   const currency = useSelector(state => state.settings.currency);
   const data = useSelector(state => state.daily_coins);
@@ -34,7 +35,7 @@ const CoinScreen = ({ navigation, route }) => {
           datasets: [{ data: high }, { data: low }],
         }}
         width={Dimensions.get('window').width} // from react-native
-        height={Dimensions.get('window').height * 0.9}
+        height={Dimensions.get('window').height}
         //yAxisLabel={currency}
         //yAxisSuffix={currency}
         yAxisInterval={1} // optional, defaults to 1
@@ -56,7 +57,7 @@ const CoinScreen = ({ navigation, route }) => {
         }}
         bezier
         style={{
-          marginVertical: 10,
+          //marginVertical: 10,
           //borderRadius: 16,
         }}
       />

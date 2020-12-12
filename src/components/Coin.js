@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
-import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon from 'react-native-vector-icons/Fontisto';
+import Block from './Block'
+//import Icon from 'react-native-vector-icons/Fontisto';
+import Icon from './Coin/Icon';
+import Title from './Coin/Title';
+import Price from './Coin/Price';
+import config from '../config';
+import { useSelector } from 'react-redux';
+
 const Coin = ({
   name,
   symbol,
@@ -11,85 +17,47 @@ const Coin = ({
   price,
   navigation,
   currency,
-  iconSize
 }) => {
-  console.log(symbol);
-  return (
-    <View
-      style={style.container}>
-      <TouchableOpacity
-        onPress={() => {
-          navigation('Coin', { name: name, symbol: symbol });
-        }}>
-        <View
-          style={{
-            padding: 6,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
-          <View style={{ flexDirection: 'row' }}>
-            <Image
-              style={iconSize ? {
-                width: iconSize,
-                height: iconSize,
-              } : style.image}
-              source={{
-                uri: `https://www.cryptocompare.com${url}`,
-              }}
-            />
-            <View>
-              <Text style={{ ...style.text, fontSize: 18 }}>{name}</Text>
-              <Text style={{ ...style.text, color: 'grey' }}>{symbol}</Text>
-            </View>
-          </View>
+  const modes = useSelector(state => state.settings.darkMode);
+  const mode_style = !modes ? config.light : config.dark;
 
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ alignItems: "flex-end" }}>
-              <Text style={style.text}>{price} {currency} </Text>
-              {!(changeHour == 0) && (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    //justifyContent: 'center',
-                    alignItems: 'center',
-                    // borderWidth: 0.5,
-                  }}>
-                  <Text
-                    style={{
-                      ...(changeHour > 0
-                        ? style.greenText
-                        : changeHour == 0
-                          ? style.grey
-                          : style.redText),
-                      ...style.text,
-                    }}>
-                    {changeHour > 0
-                      ? '+' + changeHour
-                      : changeHour == 0
-                        ? Math.abs(changeHour)
-                        : changeHour}
-                  </Text>
-                  <Ionicons
-                    name={
-                      changeHour > 0
-                        ? 'arrow-up'
-                        : changeHour < 0
-                          ? 'arrow-down'
-                          : true
-                    }
-                    size={20}
-                    color={
-                      changeHour > 0 ? 'green' : changeHour == 0 ? 'black' : 'red'
-                    }
-                  />
-                </View>
-              )}
-            </View>
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        navigation('Coin', { name: name, symbol: symbol });
+      }}>
+      <Block style={{
+        padding: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: 'transparent',
+        justifyContent: "center",
+        borderBottomWidth: 0.5,
+      }}>
+        <View style={{
+          flexDirection: 'row',
+          alignItems: 'center'
+        }}>
+          <Icon
+            url={url}
+          />
+          <Title
+            name={name}
+            symbol={symbol}
+          />
+        </View>
+
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ alignItems: "flex-end" }}>
+            <Text style={style.text}>{price} {currency} </Text>
+            {!(changeHour == 0) && (
+              <Price changeHour={changeHour} />
+            )}
           </View>
         </View>
-      </TouchableOpacity>
-    </View>
+      </Block>
+    </TouchableOpacity>
   );
 };
 
@@ -106,36 +74,14 @@ Coin.proptypes = {
 };
 
 const style = StyleSheet.create({
-  greenText: {
-    color: 'black',
-  },
-  greenText: {
-    color: 'green',
-  },
-  redText: {
-    color: 'red',
-  },
-  image: {
-    borderRightWidth: 0.5,
-    width: 50,
-    height: 50,
-  },
-  icon: {
-    borderRightWidth: 0.5,
-    width: 50,
-    height: 50,
-  },
-  container: {
-    //alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: 'white',
-    borderBottomWidth: 0.3,
-    //flexDirection: 'row',
-  },
   text: {
     marginLeft: 10,
     fontSize: 16,
     fontFamily: 'Poppins-Medium',
+  },
+  container: {
+    backgroundColor: 'transparent',
+    // borderBottomWidth: 0.3,
   },
 });
 

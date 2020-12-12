@@ -12,6 +12,8 @@ import { LineChart } from 'react-native-chart-kit';
 //BETTER NAVIGATION ROUTES AND URLS
 //CONFIG FILE
 import config from '../config'
+import TextComponent from './TextComponent';
+import LinearGradient from 'react-native-linear-gradient';
 
 
 const Test = () => {
@@ -19,24 +21,28 @@ const Test = () => {
     const [state, setState] = useState('RUB');
 
     const styles = !isEnabled ? config.light : config.dark;
-    console.log(styles.main_color);
+
+    console.log(styles.colors.gradient);
     return (
-        <View
+        <LinearGradient
+            colors={[...styles.colors.gradient]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
             style={{
-                backgroundColor: styles.background_color,
                 flex: 1,
                 opacity: 1,
-            }}>
-            <Block style={{ backgroundColor: styles.main_color }}>
-                <Text style>FUCK YOU</Text>
+            }}
+        >
+            <Block style={{ borderColor: styles.colors.main_color }}>
+                <TextComponent style={{ color: styles.colors.font_color }}>FUCK YOU</TextComponent>
             </Block>
-            <Block style={{ backgroundColor: styles.main_color }}>
-                <Text>
+            <Block style={{ borderColor: styles.main_color, justifyContent: 'space-between' }}>
+                <TextComponent style={{ color: styles.colors.font_color }}>
                     Dark theme
-                </Text>
+                </TextComponent>
                 <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                    trackColor={{ false: 'fa3580', true: 'FA3580' }}
+                    thumbColor={isEnabled ? styles.colors.main_color : 'grey'}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={toggleSwitch}
                     value={isEnabled}
@@ -59,20 +65,27 @@ const Test = () => {
                 ]}
                 defaultValue={state}
                 containerStyle={{ height: 40 }}
-                style={{ backgroundColor: '#fafafa', }}
+                style={{
+                    // marginBottom: 50,
+                    borderColor: styles.colors.main_color,
+                    backgroundColor: 'transparent',
+                }}
                 labelStyle={{
+                    color: styles.colors.font_color,
                     fontSize: 16,
                     fontFamily: 'Poppins-Medium',
                 }}
                 itemStyle={{
+                    //borderBottomWidth: 1,
                     justifyContent: 'flex-start',
                 }}
-                dropDownStyle={{ backgroundColor: '#fafafa' }}
-                dropDownStyle={{ backgroundColor: '#fafafa' }}
+                dropDownStyle={{
+                    borderColor: styles.colors.main_color,
+                    backgroundColor: 'transparent',
+                }}
                 onChangeItem={(item) => setState(item.value)}
             />
-            <View>
-                <Text>Bezier Line Chart</Text>
+            <View style={{ marginTop: 150 }}>
                 <LineChart
                     data={{
                         labels: ["January", "February", "March", "April", "May", "June"],
@@ -95,19 +108,20 @@ const Test = () => {
                     yAxisSuffix="k"
                     yAxisInterval={1} // optional, defaults to 1
                     chartConfig={{
-                        backgroundColor: "#e26a00",
-                        backgroundGradientFrom: "#fb8c00",
-                        backgroundGradientTo: "#ffa726",
+                        //backgroundColor: "#2d333a",
+                        backgroundGradientFrom: styles.colors.plot_gradient[0],
+                        backgroundGradientTo: styles.colors.plot_gradient[1],
                         decimalPlaces: 2, // optional, defaults to 2dp
-                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                        color: (opacity = 1) => styles.colors.main_color,
+                        labelColor: (opacity = 1) => styles.colors.font_color,
                         style: {
                             borderRadius: 16
                         },
                         propsForDots: {
-                            r: "6",
+                            color: 'fa3580',
+                            r: "4",
                             strokeWidth: "2",
-                            stroke: "#ffa726"
+                            stroke: styles.colors.main_color
                         }
                     }}
                     bezier
@@ -117,7 +131,7 @@ const Test = () => {
                     }}
                 />
             </View>
-        </View>
+        </LinearGradient >
     );
 };
 

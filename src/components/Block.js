@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import config from '../config';
 
 const Block = ({ children, style }) => {
+    const modes = useSelector(state => state.settings);
+    const mode_style = !modes ? config.light : config.dark;
     return (
         <View style={{ ...style, ...styles.container }}>
             {children}
@@ -16,10 +20,11 @@ Block.proptypes = {
 
 const styles = StyleSheet.create({
     container: {
-        //backgroundColor: 'white',
-        padding: 5,
+        backgroundColor: 'transparent',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         flexDirection: "row",
-        borderWidth: 0.5,
+        //borderBottomWidth: 0.8,
     }
 });
 

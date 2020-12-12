@@ -19,9 +19,9 @@ const App = () => {
   return (
     <PersistGate loading={<Loading />} persistor={persistor}>
       <Provider store={store}>
-        {//<MainNavigator />
+        <MainNavigator />
+        {//<Test />
         }
-        <Test />
       </Provider>
     </PersistGate>
   );
