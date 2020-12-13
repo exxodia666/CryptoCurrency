@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
+import config from '../../config';
 
 const Price = ({ changeHour, }) => {
     return (
@@ -10,7 +10,6 @@ const Price = ({ changeHour, }) => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                // borderWidth: 0.5,
             }}>
             <Text
                 style={{
@@ -43,15 +42,12 @@ const Price = ({ changeHour, }) => {
         </View>
     );
 };
-Price.proptypes = {
-    children: PropTypes.component
-};
 
 const style = StyleSheet.create({
     text: {
         marginLeft: 10,
-        fontSize: 16,
-        fontFamily: 'Poppins-Medium',
+        fontSize: config.light.fonts.default_font_size,
+        fontFamily: config.light.fonts.main_font,
     },
     greenText: {
         color: 'black',

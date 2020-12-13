@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { Transition, Transitioning } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-//import styled from 'styled-components';
+import config from '../config';
 
 function TabButton({ name, label, onPress, accessibilityState }) {
   const ref = React.useRef();
@@ -30,7 +30,7 @@ function TabButton({ name, label, onPress, accessibilityState }) {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: accessibilityState.selected ? 'rgba(0,0,0,0.5)' : 'white',
+          backgroundColor: accessibilityState.selected ? config.light.tabBar.color : 'white',
           borderRadius: 30,
           margin: 5,
         }}>
@@ -39,11 +39,10 @@ function TabButton({ name, label, onPress, accessibilityState }) {
           <Text
             style={{
               paddingLeft: 8,
-              fontSize: 16.5,
-              //borderWidth: 0.5,
+              fontSize: config.light.tabBar.font_size,
               textAlignVertical: 'top',
               textAlign: 'center',
-              fontFamily: 'NotoSansJP-Medium'
+              fontFamily: config.light.tabBar.fontFamily
             }}>
             {label}
           </Text>
@@ -53,14 +52,3 @@ function TabButton({ name, label, onPress, accessibilityState }) {
   );
 }
 export default TabButton;
-/*
-style={{
-  padding: 0,
-  height: 16.5,
-  //width: 16.5,
-  textAlignVertical: 'top',
-  textAlign: 'center',
-  fontSize: 16.5,
-  fontFamily: 'Poppins-Medium',
-  borderWidth: 0.5
-}}*/

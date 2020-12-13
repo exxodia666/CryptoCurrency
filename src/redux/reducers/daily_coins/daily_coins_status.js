@@ -5,7 +5,6 @@ const initialState = {
     error: {},
 };
 export default (state = initialState, action) => {
-    //console.log(action.data);
     switch (action.type) {
         case FETCHING_DAILY_COINS:
             return { status: status.fetching };

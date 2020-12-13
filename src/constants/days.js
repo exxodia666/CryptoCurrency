@@ -1,0 +1,1 @@
+export default ['Sun', 'Mon', 'Tue', 'Wed', 'Thi', 'Fri', 'Sat'];

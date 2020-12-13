@@ -1,17 +1,4 @@
 export default {
-    dark: {
-        colors: {
-            background_color: '#191d20',
-            main_color: 'purple',
-            font_color: 'white',
-            gradient: ['#49545D', '#191a1f'],
-            plot_gradient: ["#2d333a", "#191d20"],
-        },
-        fonts: {
-            main_font: '',
-            secondary_color: ''
-        }
-    },
     light: {
         colors: {
             background_color: 'white',
@@ -21,8 +8,18 @@ export default {
             plot_gradient: ['white', 'white'],
         },
         fonts: {
-            main_font: '',
-            secondary_color: ''
+            main_font: 'Poppins-Medium',
+            secondary_font: '',
+            default_font_size: 16,
+            large_font_size: 18,
+        },
+        header: {
+
+        },
+        tabBar: {
+            fontFamily: 'NotoSansJP-Bold',
+            font_size: 18,
+            color: 'grey'
         }
     }
 }
