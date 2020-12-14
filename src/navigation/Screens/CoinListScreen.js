@@ -14,7 +14,7 @@ const CoinListScreen = ({ navigation }) => {
   const currency = useSelector(state => state.settings.currency);
   const coins = useSelector((state) => state.coins);
   const count = useSelector(state => state.settings.count);
-  
+
   useEffect(() => {
     dispatch(fetchCoins(currency, count));
   }, [dispatch]);
