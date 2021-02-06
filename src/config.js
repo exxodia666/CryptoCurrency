@@ -17,7 +17,7 @@ export default {
 
         },
         tabBar: {
-            fontFamily: 'NotoSansJP-Bold',
+            fontFamily: 'Poppins-Bold',
             font_size: 18,
             color: 'grey'
         }
