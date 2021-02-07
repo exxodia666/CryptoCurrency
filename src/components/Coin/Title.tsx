@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 import config from '../../config';
 
-const Title = ({ name, symbol }) => {
+interface Title {
+    name: string
+    symbol: string
+}
+
+const Title: React.FC<Title> = ({ name, symbol }) => {
     const mode_style = config.light;
     return (
         <View>
@@ -13,9 +17,6 @@ const Title = ({ name, symbol }) => {
     );
 };
 
-Title.proptypes = {
-    children: PropTypes.component
-};
 
 const style = StyleSheet.create({
     text: {

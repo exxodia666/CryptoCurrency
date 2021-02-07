@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Image,
@@ -13,12 +13,23 @@ import Icon from './Icon';
 import Title from './Title';
 import Price from './Price';
 import config from '../../config';
-import {LinearGradient} from 'react-native-svg';
-const Coin = ({name, symbol, url, changeHour, price, navigation, currency}) => {
+import { LinearGradient } from 'react-native-svg';
+
+interface Coin {
+  name: string
+  symbol: string
+  url: string
+  changeHour: number
+  price: number
+  navigation: any
+  currency: string
+}
+
+const Coin: React.FC<Coin> = ({ name, symbol, url, changeHour, price, navigation, currency }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation('Coin', {name: name, symbol: symbol});
+        navigation('Coin', { name: name, symbol: symbol });
       }}>
       <Block
         style={{
@@ -36,12 +47,12 @@ const Coin = ({name, symbol, url, changeHour, price, navigation, currency}) => {
           <Title name={name} symbol={symbol} />
         </View>
 
-        <View style={{flexDirection: 'row'}}>
-          <View style={{alignItems: 'flex-end'}}>
+        <View style={{ flexDirection: 'row' }}>
+          <View style={{ alignItems: 'flex-end' }}>
             <Text style={style.text}>
               {price} {currency}{' '}
             </Text>
-            {!(changeHour == 0) && <Price changeHour={changeHour} />}
+            {!(changeHour === 0) && <Price changeHour={changeHour} />}
           </View>
         </View>
       </Block>

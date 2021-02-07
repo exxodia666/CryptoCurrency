@@ -3,7 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
 import config from '../../config';
 
-const Price = ({ changeHour, }) => {
+
+interface Price {
+    changeHour: number
+}
+
+
+const Price: React.FC<Price> = ({ changeHour, }) => {
     return (
         <View
             style={{
@@ -32,7 +38,7 @@ const Price = ({ changeHour, }) => {
                         ? 'arrow-up'
                         : changeHour < 0
                             ? 'arrow-down'
-                            : true
+                            : ''
                 }
                 size={20}
                 color={

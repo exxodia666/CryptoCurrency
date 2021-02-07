@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Image } from 'react-native';
-import PropTypes from 'prop-types';
 
-const Icon = ({ url }) => {
+interface Icon {
+    url: string
+}
+
+const Icon: React.FC<Icon> = ({ url }) => {
     return (
         <Image
             style={styles.icon}
@@ -12,11 +15,8 @@ const Icon = ({ url }) => {
         />
     );
 };
-Icon.proptypes = {
-    children: PropTypes.component
-};
+
 const styles = StyleSheet.create({
-    
     icon: {
         width: 50,
         height: 50,

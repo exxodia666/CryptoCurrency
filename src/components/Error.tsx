@@ -1,18 +1,17 @@
 import React from 'react';
 import {
-  Dimensions,
-  Image,
   StyleSheet,
   Text,
-  TouchableHighlight,
-  TouchableNativeFeedbackComponent,
   TouchableOpacity,
   View,
 } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import PropTypes from 'prop-types';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-const Error = ({error}) => {
+
+interface Error {
+  error: string
+}
+const Error: React.FC<Error> = ({ error }): JSX.Element => {
   return (
     <View style={style.container}>
       <View style={style.error}>
@@ -31,12 +30,11 @@ const Error = ({error}) => {
   );
 };
 
-Error.proptypes = {
-  //changeHour: PropTypes.number,
-};
-
 const style = StyleSheet.create({
-  container: {paddingTop: 10, alignItems: 'center'},
+  container: {
+    paddingTop: 10,
+    alignItems: 'center'
+  },
   error: {
     borderRadius: 7,
     //flex: 1,

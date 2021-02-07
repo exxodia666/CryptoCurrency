@@ -5,13 +5,28 @@ import { Transition, Transitioning } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import config from '../config';
 
-function TabButton({ name, label, onPress, accessibilityState }) {
+interface ITabButton {
+  name: string
+  label: string
+  onPress: () => void
+  accessibilityState: { selected: boolean }
+}
+const TabButton: React.FC<ITabButton> = ({
+  name,
+  label,
+  onPress,
+  accessibilityState,
+}): JSX.Element => {
+
   const ref = React.useRef();
-  const transition = (<Transition.Sequence>
-    <Transition.Out type='fade' delayMs={0} />
-    <Transition.Change interpolation='easeOut' delayMs={10} />
-    <Transition.In type='fade' delayMs={10} />
-  </Transition.Sequence>)
+
+  const transition = (
+    <Transition.Sequence>
+      <Transition.Out type="fade" delayMs={0} />
+      <Transition.Change interpolation="easeOut" delayMs={10} />
+      <Transition.In type="fade" delayMs={10} />
+    </Transition.Sequence>
+  );
 
   return (
     <TouchableOpacity
@@ -30,7 +45,9 @@ function TabButton({ name, label, onPress, accessibilityState }) {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: accessibilityState.selected ? config.light.tabBar.color : 'white',
+          backgroundColor: accessibilityState.selected
+            ? config.light.tabBar.color
+            : 'white',
           borderRadius: 30,
           margin: 5,
         }}>
@@ -42,13 +59,13 @@ function TabButton({ name, label, onPress, accessibilityState }) {
               fontSize: config.light.tabBar.font_size,
               textAlignVertical: 'top',
               textAlign: 'center',
-              fontFamily: config.light.tabBar.fontFamily
+              fontFamily: config.light.tabBar.fontFamily,
             }}>
             {label}
           </Text>
         )}
       </Transitioning.View>
-    </TouchableOpacity >
+    </TouchableOpacity>
   );
-}
+};
 export default TabButton;
