@@ -1,262 +1,80 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Alert,
-  Button,
-  StyleSheet,
-  Switch,
-  Text,
-  View,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import fetchCoins from '../../redux/actions/coins';
 import saveSettings from '../../redux/actions/settings';
-import Slider from '@react-native-community/slider'
-import Coin from '../../components/Coin';
-import Icon from 'react-native-vector-icons/FontAwesome5'
-import Setting from '../../components/Setting';
-//render button after changes
-const SettingsScreen = () => {
-  const currency = useSelector(state => state.settings.currency);
-  const [state, setState] = useState(currency);
-  const [language, setLanguage] = useState('ENGLISH');
-  const [iconSize, setIconSize] = useState(10);
-  const dispatch = useDispatch();
-  const [fontSize, setFontSize] = useState(12);
-  const [isEnabled, toggleSwitch] = useState(true);
-  return (
+import config from '../../config';
+import currencies from '../../constants/currencies';
+import count from '../../constants/count';
 
-    <View>
-      <Setting />
-      {/*
+const SettingsScreen = () => {
+  const dispatch = useDispatch();
+  const prev_currency = useSelector((state) => state.settings.currency);
+  const prev_count = useSelector((state) => state.settings.count);
+  const currenciesArray = currencies.map((item) => {
+    if (item.value === prev_currency) {
+      return {...item, disabled: true};
+    } else return item;
+  });
+  const countArray = count.map((item) => {
+    if (item.value === prev_count) {
+      return {...item, disabled: true};
+    } else return item;
+  });
+  return (
+    <View style={style.container}>
       <View>
-        {
-          //todo fetch currencies
-        }
         <DropDownPicker
-          items={[
-            {
-              label: 'RUB',
-              value: 'RUB',
-            },
-            {
-              label: 'UAH',
-              value: 'UAH',
-            },
-            {
-              label: 'USD',
-              value: 'USD',
-            },
-          ]}
-          defaultValue={state}
-          containerStyle={{ height: 40 }}
-          style={{ backgroundColor: '#fafafa' }}
+          items={currenciesArray}
+          defaultValue={prev_currency}
+          containerStyle={{height: 40}}
+          style={{backgroundColor: '#fafafa'}}
+          labelStyle={{
+            fontSize: 16,
+            fontFamily: 'Poppins-Medium',
+          }}
           itemStyle={{
             justifyContent: 'flex-start',
           }}
-          dropDownStyle={{ backgroundColor: '#fafafa' }}
-          dropDownStyle={{ backgroundColor: '#fafafa' }}
-          onChangeItem={(item) => setState(item.value)}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          onChangeItem={(item) => {
+            dispatch(saveSettings({currency: item.value, count: prev_count}));
+            dispatch(fetchCoins(item.value, prev_count));
+          }}
         />
         <DropDownPicker
-          items={[
-            {
-              label: 'UKRAINIAN',
-              value: 'UKRAINIAN',
-            },
-            {
-              label: 'RUSSIAN',
-              value: 'RUSSIAN',
-            },
-            {
-              label: 'ENGLISH',
-              value: 'ENGLISH',
-            },
-          ]}
-          defaultValue={language}
-          containerStyle={{ height: 40 }}
-          style={{ backgroundColor: '#fafafa' }}
+          items={countArray}
+          defaultValue={prev_count}
+          containerStyle={{height: 40}}
+          style={{backgroundColor: '#fafafa'}}
+          labelStyle={{
+            fontSize: 16,
+            fontFamily: 'Poppins-Medium',
+          }}
           itemStyle={{
             justifyContent: 'flex-start',
           }}
-          dropDownStyle={{ backgroundColor: '#fafafa' }}
-          dropDownStyle={{ backgroundColor: '#fafafa' }}
-          onChangeItem={(item) => setLanguage(item.value)}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          onChangeItem={(item) => {
+            dispatch(
+              saveSettings({currency: prev_currency, count: item.value}),
+            );
+            dispatch(fetchCoins(prev_currency, item.value));
+          }}
         />
-        {
-          //TODO BETTER ALERTS
-        }
       </View>
-      <Coin
-        currency="USD"
-        //navigation={navigation.navigate}
-        //key={item.CoinInfo.Id}
-        name='Bitcoin'
-        symbol='BTC'
-        url='/media/19633/btc.png'
-        changeDay={3556}
-        changeHour={2}
-        price={156657}
-      />
-      <Icon
-        name='icons'
-        size = {35}
-      />
-      <Text>IconSize: {iconSize}</Text>
-      <Slider
-        onValueChange={(e) => setIconSize(e)}
-        step={1}
-        style={{ width: '100%', height: 40, padding: 10 }}
-        value={iconSize}
-        minimumValue={5}
-        maximumValue={20}
-        minimumTrackTintColor="#000000"
-        maximumTrackTintColor="#FFFFFF"
-      />
-      <Text>FontSize: {fontSize}</Text>
-      <Slider
-        onValueChange={(e) => setFontSize(e)}
-        step={1}
-        style={{ width: '100%', height: 40, padding: 10 }}
-        value={fontSize}
-        minimumValue={5}
-        maximumValue={20}
-        minimumTrackTintColor="#000000"
-        maximumTrackTintColor="#FFFFFF"
-      />
-      <Text>Dark theme</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
-      <Button
-        title="Save Changes"
-        onPress={() => {
-          dispatch(saveSettings(state));
-          dispatch(fetchCoins(state));
-          Alert.alert('Saved!');
-        }}
-      />*/}
     </View>
   );
 };
-/*
-Coin.proptypes = {
-        id: PropTypes.number,
-  price: PropTypes.number,
-  price_symbol: PropTypes.string,
-  url: PropTypes.string,
-  name: PropTypes.string,
-  symbol: PropTypes.string,
-  changeDay: PropTypes.number,
-  changeHour: PropTypes.number,
-};
-*/
 const style = StyleSheet.create({
-  header: {
-    padding: 7,
-    backgroundColor: 'white',
-    borderBottomWidth: 0.5,
-  },
   text: {
     marginLeft: 10,
-    fontSize: 26,
-    fontFamily: 'Poppins-Medium',
+    fontSize: config.light.fonts.default_font_size,
+    fontFamily: config.light.fonts.main_font,
   },
 });
 
 export default SettingsScreen;
-{
-          //TODO BETTER ALERTS
-       /*
-      </View>
-
-      <Icon
-        name='icons'
-        size={35}
-      />
-      <Text>IconSize: {iconSize}</Text>
-      <Slider
-        onValueChange={(e) => setIconSize(e)}
-        step={1}
-        style={{ width: '100%', height: 40, padding: 10 }}
-        value={iconSize}
-        minimumValue={5}
-        maximumValue={20}
-        minimumTrackTintColor="#000000"
-        maximumTrackTintColor="#FFFFFF"
-      />
-      <Text>FontSize: {fontSize}</Text>
-      <Slider
-        onValueChange={(e) => setFontSize(e)}
-        step={1}
-        style={{ width: '100%', height: 40, padding: 10 }}
-        value={fontSize}
-        minimumValue={5}
-        maximumValue={20}
-        minimumTrackTintColor="#000000"
-        maximumTrackTintColor="#FFFFFF"
-      />
-      <Text>Dark theme</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-        />*/}
-{
-  //todo fetch currencies
-  /*
-  */
-}
-
-{/*
-      <Coin
-        iconSize={iconSize}
-        currency="USD"
-        name='Bitcoin'
-        symbol='BTC'
-        url='/media/19633/btc.png'
-        changeDay={3556}
-        changeHour={2}
-        price={156657}
-      />
-      <View>
-        <View style={{ flexDirection: 'row' }}>
-          <Icon
-            name='language'
-            size={25}
-          />
-          <DropDownPicker
-            items={[
-              {
-                label: 'UKRAINIAN',
-                value: 'UKRAINIAN',
-              },
-              {
-                label: 'RUSSIAN',
-                value: 'RUSSIAN',
-              },
-              {
-                label: 'ENGLISH',
-                value: 'ENGLISH',
-              },
-            ]}
-            defaultValue={language}
-            containerStyle={{ height: 40 }}
-            style={{ backgroundColor: '#fafafa' }}
-            itemStyle={{
-              justifyContent: 'flex-start',
-            }}
-            dropDownStyle={{ backgroundColor: '#fafafa' }}
-            dropDownStyle={{ backgroundColor: '#fafafa' }}
-            onChangeItem={(item) => setLanguage(item.value)}
-          />
-        </View>
-      </View>
-          */}
-

@@ -59,3 +59,5 @@ buck-out/
 /ios/Pods/
 android/app/build.gradle
 android/app/build.gradle
+android/java_pid10272.hprof
+android/java_pid11128.hprof

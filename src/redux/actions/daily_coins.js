@@ -5,7 +5,6 @@ export const FETCH_DAILY_COINS_ERROR = 'FETCH_DAILY_COINS_ERROR';
 import fetch_daily_coins from '../../utills/fetch_daily_coins';
 
 const fetchDailyCoins = (crypto_currency, currency) => {
-  console.log(crypto_currency, currency);
   return async (dispatch) => {
     dispatch({ type: FETCHING_DAILY_COINS });
     try {

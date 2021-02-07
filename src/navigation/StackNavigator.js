@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CoinListScreen from './Screens/CoinListScreen';
 import CoinScreen from './Screens/CoinScreen';
 
+
 const StackNavigator = () => {
   const Stack = createStackNavigator();
   return (

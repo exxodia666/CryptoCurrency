@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  //console.log(action.data);
   switch (action.type) {
     case FETCHING_COINS:
       return { status: status.fetching };

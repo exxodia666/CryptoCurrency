@@ -12,9 +12,7 @@ import {
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import PropTypes from 'prop-types';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
 const Error = ({error}) => {
-  console.log(error.toString());
   return (
     <View style={style.container}>
       <View style={style.error}>
