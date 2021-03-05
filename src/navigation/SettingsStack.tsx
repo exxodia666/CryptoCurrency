@@ -1,13 +1,14 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import SettingsScreen from './Screens/SettingsScreen';
+import CustomStackNav from '../components/template/CustomStackNav';
 
-const SettingsStack = () => {
+const SettingsStack: React.FC = (): JSX.Element => {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator>
+    <CustomStackNav>
       <Stack.Screen name="Settings" component={SettingsScreen} />
-    </Stack.Navigator>
+    </CustomStackNav>
   );
 };
 export default SettingsStack;

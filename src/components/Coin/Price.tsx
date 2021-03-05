@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
-import config from '../../config';
+import { config } from '../../config';
 
 
 interface Price {
     changeHour: number
 }
-
-
 const Price: React.FC<Price> = ({ changeHour, }) => {
     return (
         <View
@@ -38,7 +36,7 @@ const Price: React.FC<Price> = ({ changeHour, }) => {
                         ? 'arrow-up'
                         : changeHour < 0
                             ? 'arrow-down'
-                            : ''
+                            : 'minus'
                 }
                 size={20}
                 color={
@@ -54,9 +52,6 @@ const style = StyleSheet.create({
         marginLeft: 10,
         fontSize: config.light.fonts.default_font_size,
         fontFamily: config.light.fonts.main_font,
-    },
-    greenText: {
-        color: 'black',
     },
     greenText: {
         color: 'green',

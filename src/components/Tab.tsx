@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { Transition, Transitioning } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import config from '../config';
+import { config } from '../config';
 
 interface ITabButton {
   name: string
@@ -51,10 +51,11 @@ const TabButton: React.FC<ITabButton> = ({
           borderRadius: 30,
           margin: 5,
         }}>
-        <Icon name={name} size={28} />
+        <Icon name={name} size={28} color={accessibilityState.selected ? config.light.tabBar.font_color : config.light.tabBar.color} />
         {accessibilityState.selected && (
           <Text
             style={{
+              color: config.light.tabBar.font_color,
               paddingLeft: 8,
               fontSize: config.light.tabBar.font_size,
               textAlignVertical: 'top',

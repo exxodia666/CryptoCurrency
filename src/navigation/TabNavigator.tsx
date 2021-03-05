@@ -4,7 +4,7 @@ import TabButton from '../components/Tab';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SettingsStack from './SettingsStack';
 
-const TabNavigator = () => {
+const TabNavigator: React.FC = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator initialRouteName="Home">

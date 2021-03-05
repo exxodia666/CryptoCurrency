@@ -1,61 +1,84 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Button,
-  Image,
+  Animated,
+  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import PropTypes from 'prop-types';
-import Block from '../template/BlockComponent';
 import Icon from './Icon';
 import Title from './Title';
 import Price from './Price';
-import config from '../../config';
-import { LinearGradient } from 'react-native-svg';
-
+import { config } from '../../config';
+import Card from '../template/Card';
 interface Coin {
+  index: number
+  y: Animated.Value
   name: string
   symbol: string
   url: string
   changeHour: number
+  changeDay: number
   price: number
   navigation: any
   currency: string
 }
 
-const Coin: React.FC<Coin> = ({ name, symbol, url, changeHour, price, navigation, currency }) => {
+const Coin: React.FC<Coin> = ({ name, symbol, url, changeHour, price, navigation, currency, changeDay, y, index }) => {
+  console.log(index);
+  const { height: wHeigth } = Dimensions.get('window');
+  const height = wHeigth;
+  const position = Animated.subtract(index * 100, y);
+  const isDisappearing = - 100;
+  const isAppearing = height;
+  const isTop = 0;
+  const isBottom = height - 100;
+
+  const scale = position.interpolate({
+    inputRange: [isDisappearing, isTop, isBottom, isAppearing],
+    outputRange: [0.5, 1, 1, 0.5],
+    extrapolate: 'clamp'
+  })
+
+  const translateY = Animated.add(y, y.interpolate({
+    inputRange: [0, index * 110],
+    outputRange: [0, -index * 110],
+    extrapolateRight: "clamp"
+  }));
+
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation('Coin', { name: name, symbol: symbol });
+        //navigation('Coin', { name: name, symbol: symbol });
       }}>
-      <Block
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          backgroundColor: 'transparent',
-        }}>
-        <View
+      <Animated.View style={[style.container, { transform: [{ translateY },] }]}>
+        <Card
           style={{
             flexDirection: 'row',
             alignItems: 'center',
+            justifyContent: 'space-between',
+            //backgroundColor: 'transparent',
           }}>
-          <Icon url={url} />
-          <Title name={name} symbol={symbol} />
-        </View>
-
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ alignItems: 'flex-end' }}>
-            <Text style={style.text}>
-              {price} {currency}{' '}
-            </Text>
-            {!(changeHour === 0) && <Price changeHour={changeHour} />}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <Icon url={url} />
+            <Title name={name} symbol={symbol} />
           </View>
-        </View>
-      </Block>
+
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ alignItems: 'flex-end' }}>
+              <Text style={style.text}>
+                {price} {currency}{' '}
+              </Text>
+              {!(changeHour === 0) && <Price changeHour={changeHour} />}
+            </View>
+          </View>
+        </Card>
+      </Animated.View>
     </TouchableOpacity>
   );
 };
@@ -83,8 +106,9 @@ const style = StyleSheet.create({
     fontFamily: config.light.fonts.main_font,
   },
   container: {
-    backgroundColor: 'transparent',
-  },
+    height: 100,
+    margin: 5
+  }
 });
 
 export default Coin;

@@ -1,4 +1,4 @@
-export default [
+export const currencies: { label: string, value: string }[] = [
     {
         label: 'RUB',
         value: 'RUB',

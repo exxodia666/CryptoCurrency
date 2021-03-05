@@ -1,8 +1,8 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './TabNavigator';
 
-const MainNavigator = () => {
+const MainNavigator: React.FC = (): JSX.Element => {
   return (
     <NavigationContainer>
       <TabNavigator />

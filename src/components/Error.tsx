@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+//import AntDesign from 'react-native-vector-icons/AntDesign';
 
 interface Error {
   error: string
@@ -15,7 +15,6 @@ const Error: React.FC<Error> = ({ error }): JSX.Element => {
   return (
     <View style={style.container}>
       <View style={style.error}>
-        <AntDesign name="exception1" size={230} color="red" />
         <Text style={style.text}>{error.toString()}</Text>
         <TouchableOpacity>
           <SimpleLineIcons
